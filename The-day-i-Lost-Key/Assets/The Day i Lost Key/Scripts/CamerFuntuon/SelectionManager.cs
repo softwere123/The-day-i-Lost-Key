@@ -1,53 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
+//단일 책임 원칙 각 책임을 가져와 별도의 인터 페이스로 옮겨 선택관리자가 한가지만 책임짐으로 한다
 public class SelectionManager : MonoBehaviour
 {
     [SerializeField] private string selectableTag = "Selectable"; // 선택 가능한 오브젝트의 태그
     [SerializeField] private Material highlightMaterial;
     [SerializeField] private Material defaultMaterial; // 기본 재질
-    
-    //다시 재질 변경 호출
+ 
+
+
     private Transform _selection;
 
+    //다시 재질 변경 호출
     private void Update()
     {
-        //변경할 조건식
-        if ( _selection != null)
+        // Deselection/Selection Response
+        if (_selection != null)
         {
-            
+            var selection = _selection;
             var selectionRenderer = _selection.GetComponent<Renderer>();
-            selectionRenderer.material = defaultMaterial; // 예시: 색상 변경
-            _selection = null; // 선택 해제
-
-
+            if (selectionRenderer != null)
+            {
+                selectionRenderer.material = defaultMaterial;
+            }
         }
-        //var  ray에 카메라 스크린 포인트를 레이로 변환
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //if 문에 사용할 레이캐스트 함수 선언
-        RaycastHit hit;
+        #region Raycasting and Selection
 
-        // 레이 캐스트 탐색기 제작 아웃 조건문으로 호출선언
-        if (Physics.Raycast(ray, out hit))
+        //Creating Ray
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        // Selection Determination
+        _selection = null;
+        if (Physics.Raycast(ray, out var hit))
         {
             var selection = hit.transform;
-            if ((selection.CompareTag(selectableTag)))
+            if (selection.CompareTag(selectableTag))
             {
-                var selectionRenderer = selection.GetComponent<Renderer>();
-                if (selectionRenderer != null)
-                {
-                    // 선택된 오브젝트에 대한 처리
-                    selectionRenderer.material = highlightMaterial; // 예시: 색상 변경
-                }
-
+                _selection = selection;
             }
-
-            _selection = selection;
-
         }
+
+        #endregion
+        // Deselection/Selection Response
+        if (_selection != null)
+        {
+            var selectionRenderer = _selection.GetComponent<Renderer>();
+            if (selectionRenderer != null) 
+            {
+                selectionRenderer.material = highlightMaterial;
+            }
+        }
+
     }
-   
+
 }
