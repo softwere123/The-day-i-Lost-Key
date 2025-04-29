@@ -7,20 +7,24 @@ public class PlayerController : MonoBehaviour
     public Camera playerCamera;
     private Rigidbody rb;
 
-    void Start()
+    void Awake()
     {
-        // Rigidbody 참조를 찾고 없으면 추가합니다.
+        // Rigidbody 초기화
         rb = GetComponent<Rigidbody>();
 
+        // Rigidbody가 없다면 오류 메시지를 출력
         if (rb == null)
         {
             Debug.LogError("Rigidbody is missing from Player!");
+            return;
         }
+
+      
     }
 
     void Update()
     {
-        // Rigidbody가 없다면 이동하지 않음
+        // Rigidbody가 없으면 이동하지 않음
         if (rb == null) return;
 
         // 이동 (WASD)
