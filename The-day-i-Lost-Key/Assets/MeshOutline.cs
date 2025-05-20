@@ -5,7 +5,7 @@ using UnityEngine;
 public class MeshOutline : MonoBehaviour
 {
     public Color outlineColor = Color.yellow;
-    public float outlineWidth = 0.01f;
+    public float outlineWidth = 1.05f; // 약간 커지게
 
     private GameObject outlineObject;
 
@@ -17,14 +17,12 @@ public class MeshOutline : MonoBehaviour
 
     void CreateOutline()
     {
-        // 외곽선용 쉘 오브젝트 생성
         outlineObject = new GameObject("Outline");
         outlineObject.transform.SetParent(transform);
         outlineObject.transform.localPosition = Vector3.zero;
         outlineObject.transform.localRotation = Quaternion.identity;
-        outlineObject.transform.localScale = Vector3.one * (1f + outlineWidth);
+        outlineObject.transform.localScale = Vector3.one * outlineWidth;
 
-        // 외곽선용 메쉬 복사
         MeshFilter sourceMF = GetComponent<MeshFilter>();
         MeshRenderer sourceMR = GetComponent<MeshRenderer>();
 
@@ -36,7 +34,6 @@ public class MeshOutline : MonoBehaviour
         outlineMat.color = outlineColor;
         outlineMR.material = outlineMat;
 
-        // 뒷면만 렌더해서 외곽선처럼 보이게 (선택)
         outlineMR.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         outlineMR.receiveShadows = false;
     }

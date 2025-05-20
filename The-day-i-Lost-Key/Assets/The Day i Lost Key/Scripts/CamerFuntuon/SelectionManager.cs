@@ -1,32 +1,35 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SelectionManager : MonoBehaviour
 {
-    [SerializeField] private string selectableTag = "Selectable";
-
-    // 각 선택 오브젝트가 보여줄 오브젝트 매핑
     [System.Serializable]
-    public class SelectionTargetPair
+    public class SelectableObject
     {
-        public GameObject selectableObject;
-        public GameObject targetToActivate;
+        public GameObject selectable;    // 클릭할 오브젝트
+        public GameObject targetObject;  // 클릭 시 켤 오브젝트 (영상 등)
     }
 
-    public List<SelectionTargetPair> selectionTargets = new List<SelectionTargetPair>();
+    [SerializeField]
+    private SelectableObject[] selectableObjects;
 
-    private List<GameObject> activeTargets = new List<GameObject>();
+    private SelectableObject currentSelection = null;
+    private MeshOutline currentOutline = null;
 
     void Update()
     {
-        // ESC 키 누르면 모든 활성화된 오브젝트 비활성화
+        // ESC 눌렀을 때 현재 선택 해제
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            foreach (var obj in activeTargets)
+            if (currentSelection != null)
             {
-                if (obj != null) obj.SetActive(false);
+                if (currentOutline != null)
+                    currentOutline.HideOutline();
+
+                currentSelection.targetObject.SetActive(false);
+
+                currentSelection = null;
+                currentOutline = null;
             }
-            activeTargets.Clear();
             return;
         }
 
@@ -34,19 +37,34 @@ public class SelectionManager : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out var hit))
+
+            if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                var selected = hit.transform.gameObject;
-                if (selected.CompareTag(selectableTag))
+                foreach (var so in selectableObjects)
                 {
-                    foreach (var pair in selectionTargets)
+                    if (hit.transform.gameObject == so.selectable)
                     {
-                        if (pair.selectableObject == selected)
+                        // 이전 선택 해제
+                        if (currentSelection != null)
                         {
-                            pair.targetToActivate.SetActive(true);
-                            activeTargets.Add(pair.targetToActivate);
-                            break;
+                            if (currentOutline != null)
+                                currentOutline.HideOutline();
+
+                            currentSelection.targetObject.SetActive(false);
                         }
+
+                        // 새 선택 활성화
+                        currentSelection = so;
+
+                        // 아웃라인 켜기
+                        currentOutline = currentSelection.selectable.GetComponent<MeshOutline>();
+                        if (currentOutline != null)
+                            currentOutline.ShowOutline();
+
+                        // 타겟 오브젝트 켜기
+                        currentSelection.targetObject.SetActive(true);
+
+                        break;
                     }
                 }
             }
