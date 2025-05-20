@@ -1,37 +1,66 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Renderer))]
 public class SimpleOutline : MonoBehaviour
 {
-    [SerializeField] private Material outlineMaterial;    // 외곽선 머티리얼
-    private Material[] originalMaterials;                 // 원래 머티리얼들
-    private Renderer rend;
+    public Color outlineColor = Color.yellow;
+    public float outlineScale = 1.05f;
 
-    void Awake()
+    private Material originalMaterial;
+    private Material outlineMaterial;
+    private Renderer rend;
+    private bool isOutlined = false;
+
+    void Start()
     {
         rend = GetComponent<Renderer>();
-        if (rend != null)
+
+        if (rend == null)
         {
-            originalMaterials = rend.materials;
+            Debug.LogWarning("Renderer 없음");
+            enabled = false;
+            return;
         }
+
+        if (rend.material == null)
+        {
+            Debug.LogWarning("기본 메터리얼 없음");
+            enabled = false;
+            return;
+        }
+
+        originalMaterial = rend.material;
+
+        // 기본 Unlit 셰이더
+        Shader shader = Shader.Find("Unlit/Color");
+        if (shader == null)
+        {
+            Debug.LogError("Unlit/Color 셰이더 없음");
+            enabled = false;
+            return;
+        }
+
+        outlineMaterial = new Material(shader);
+        outlineMaterial.color = outlineColor;
     }
 
     public void ShowOutline()
     {
-        if (rend == null || outlineMaterial == null) return;
-
-        // 원래 머티리얼 + 외곽선 머티리얼 추가
-        Material[] mats = new Material[originalMaterials.Length + 1];
-        originalMaterials.CopyTo(mats, 0);
-        mats[mats.Length - 1] = outlineMaterial;
-
-        rend.materials = mats;
+        if (!isOutlined && rend != null && outlineMaterial != null)
+        {
+            rend.material = outlineMaterial;
+            transform.localScale *= outlineScale;
+            isOutlined = true;
+        }
     }
 
     public void HideOutline()
     {
-        if (rend == null) return;
-
-        // 원래 머티리얼로 복구
-        rend.materials = originalMaterials;
+        if (isOutlined && rend != null && originalMaterial != null)
+        {
+            rend.material = originalMaterial;
+            transform.localScale /= outlineScale;
+            isOutlined = false;
+        }
     }
 }
