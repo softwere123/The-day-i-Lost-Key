@@ -1,24 +1,42 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-// trans late Scena if you enadble sub and esc sub you will chage Scean
 public class PhotoSubTransScean : MonoBehaviour
 {
-    // GameManager를 통한 상태 확인
-    public GameObject Sub;
-
-    // 전환할 씬 이름
+    public GameObject Sub;               // ESC로 닫을 UI
+    public GameObject triggerObject;     // 클릭될 오브젝트
     public string sceneToLoad = "scene_2";
+
+    private bool triggered = false;      // 클릭 여부
 
     void Update()
     {
-        // Sub가 존재하고, 활성화되어 있으며, ESC 키가 눌렸을 때만 씬 전환
-        if (Sub != null && Sub.gameObject.activeSelf && Input.GetKeyDown(KeyCode.Escape))
+        // 오브젝트 클릭 감지 (Raycast)
+        if (Input.GetMouseButtonDown(0))
         {
-            SceneManager.LoadScene(sceneToLoad);
-            Debug.Log("dd");
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                if (hit.collider.gameObject == triggerObject)
+                {
+                    triggered = true;
+                    Sub.SetActive(true);
+                    Debug.Log("트리거 오브젝트 클릭됨, Sub 활성화");
+                }
+            }
+        }
+
+        // ESC 입력 처리
+        if (Input.GetKeyDown(KeyCode.Escape) && Sub.activeSelf)
+        {
+            Sub.SetActive(false);
+            Debug.Log("Sub 비활성화됨");
+
+            if (triggered)
+            {
+                Debug.Log("씬 전환");
+                SceneManager.LoadScene(sceneToLoad);
+            }
         }
     }
 }

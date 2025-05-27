@@ -68,7 +68,7 @@ public class SelectionManager : MonoBehaviour
                             totalSelectedCount++;
 
                             // 3개 이상 선택되면 지정된 오브젝트 켜기
-                            if (totalSelectedCount >= 3 && activateAfterThreeSelected != null)
+                            if (totalSelectedCount >= 4 && activateAfterThreeSelected != null)
                             {
                                 activateAfterThreeSelected.SetActive(true);
                             }

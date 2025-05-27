@@ -5,7 +5,7 @@ using UnityEngine;
 public class MeshOutline : MonoBehaviour
 {
     public Color outlineColor = Color.yellow;
-    public float outlineWidth = 1.05f; // 약간 커지게
+    public float outlineWidth = 1.05f;
 
     private GameObject outlineObject;
 
@@ -36,6 +36,16 @@ public class MeshOutline : MonoBehaviour
 
         outlineMR.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         outlineMR.receiveShadows = false;
+    }
+
+    void OnMouseEnter()
+    {
+        ShowOutline();
+    }
+
+    void OnMouseExit()
+    {
+        HideOutline();
     }
 
     public void ShowOutline()
