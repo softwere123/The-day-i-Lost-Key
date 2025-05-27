@@ -5,13 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/The Day i Lost Key/Scenes/Memory_Mother01.unity
-    guid: 9a005074a5d4e2c46ae6e3233e9e8845
-  - enabled: 0
-    path: Assets/The Day i Lost Key/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/The Day i Lost Key/Scenes/scene_0.unity
     guid: 1b9b3bfb017b76348a127727645eae9d
+  - enabled: 1
+    path: Assets/The Day i Lost Key/Scenes/scene_2.unity
+    guid: 634c41117f48a1940933d58845b6f252
   m_configObjects: {}
