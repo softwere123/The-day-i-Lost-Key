@@ -4024,11 +4024,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2975271404710531022, guid: 6ccfd9a822c0e1747b4bff268721c9bd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4.24
+      value: 4.245
       objectReference: {fileID: 0}
     - target: {fileID: 2975271404710531022, guid: 6ccfd9a822c0e1747b4bff268721c9bd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.29
+      value: 3.006
       objectReference: {fileID: 0}
     - target: {fileID: 2975271404710531022, guid: 6ccfd9a822c0e1747b4bff268721c9bd, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7700,10 +7700,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4480046749992435139, guid: 10439a0aa1283df4ba9272dfc70b025b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4999692517921441356, guid: 10439a0aa1283df4ba9272dfc70b025b, type: 3}
       propertyPath: m_Name
       value: Photo
