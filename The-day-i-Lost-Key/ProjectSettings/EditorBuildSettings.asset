@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/The Day i Lost Key/Scenes/scene_2.unity
     guid: 634c41117f48a1940933d58845b6f252
+  - enabled: 1
+    path: Assets/The Day i Lost Key/Scenes/scene_3.unity
+    guid: 5c4fd74b043145a4cb81d55f9f091a9a
   m_configObjects: {}
