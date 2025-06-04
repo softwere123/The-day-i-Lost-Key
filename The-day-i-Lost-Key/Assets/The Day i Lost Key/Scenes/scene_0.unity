@@ -2148,15 +2148,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4191804830721401889, guid: bb475009b53bdd941b5ca4da0176680d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.69624627
+      value: 0.66670454
       objectReference: {fileID: 0}
     - target: {fileID: 4191804830721401889, guid: bb475009b53bdd941b5ca4da0176680d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.39326146
+      value: 0.37657538
       objectReference: {fileID: 0}
     - target: {fileID: 4191804830721401889, guid: bb475009b53bdd941b5ca4da0176680d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.2062
+      value: 1.155021
       objectReference: {fileID: 0}
     - target: {fileID: 4191804830721401889, guid: bb475009b53bdd941b5ca4da0176680d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2164,7 +2164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4191804830721401889, guid: bb475009b53bdd941b5ca4da0176680d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.011
       objectReference: {fileID: 0}
     - target: {fileID: 4191804830721401889, guid: bb475009b53bdd941b5ca4da0176680d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -8382,10 +8382,10 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 691595214}
+  - {fileID: 342931321}
   - {fileID: 1758900330}
   - {fileID: 874894768}
   - {fileID: 5591174226093381305}
-  - {fileID: 342931321}
   - {fileID: 2134272627}
   - {fileID: 1720641716}
   - {fileID: 1299877162}
