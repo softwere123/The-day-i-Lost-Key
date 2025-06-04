@@ -1879,6 +1879,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1280545413468791384, guid: 1d48f0c7d870a2d4e89eebbec6002066, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1803362037429023573, guid: 1d48f0c7d870a2d4e89eebbec6002066, type: 3}
+      propertyPath: m_RenderPostProcessing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1803362037429023573, guid: 1d48f0c7d870a2d4e89eebbec6002066, type: 3}
+      propertyPath: m_VolumeLayerMask.m_Bits
+      value: 65
+      objectReference: {fileID: 0}
     - target: {fileID: 3775933377610139631, guid: 1d48f0c7d870a2d4e89eebbec6002066, type: 3}
       propertyPath: m_Name
       value: playerComponent2
@@ -2083,6 +2095,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1118137068}
   m_Mesh: {fileID: 4300002, guid: 0d2ed163860809d48ab2e72792d683e8, type: 3}
+--- !u!1 &1153910648
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1153910650}
+  - component: {fileID: 1153910649}
+  m_Layer: 6
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1153910649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153910648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: df10055635dc4334687be4905d2cd8f8, type: 2}
+--- !u!4 &1153910650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153910648}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.3912698, y: 1.9357158, z: -1.6058964}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1214608832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4753,3 +4814,4 @@ SceneRoots:
   - {fileID: 1258295624194688840}
   - {fileID: 317429941}
   - {fileID: 2120292596}
+  - {fileID: 1153910650}
